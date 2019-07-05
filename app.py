@@ -1,5 +1,6 @@
 # import dependencies
 import os
+import logging
 from flask import Flask
 import json
 
@@ -13,7 +14,8 @@ port = int(os.getenv('PORT', '3000'))
 @app.route('/')
 def hello_world():
     VCAP_APPLICATION = json.loads(os.environ['VCAP_APPLICATION'])
-
+    logging.basicConfig(level=logging.DEBUG)
+    logging.debug('This will get logged')
     return 'Welcome to Nimbus! container ID: %s' %(VCAP_APPLICATION["application_id"])
 
 
